@@ -18,7 +18,7 @@ options:
 
 EXAMPLES = '''
 - name: "config nrpe"
-  count_page:
+  auto_nagios_nrpe:
 	ip_nagios: "192.168.1.49"
 	request: ""
 '''
@@ -61,7 +61,7 @@ def main():
     index_balise = message.find('allowed_hosts')
     index_debut = message.find('127.0.0.1', index_balise)
     index_fin = message.find('\n', index_debut)
-    message = message[:index_debut] + str(nagios.IP.ip) + message[index_fin:]
+    message = message[:index_debut] + ip_nagios_local + message[index_fin:]
 
     # ajout des indicateurs local à envoyer au serveur nagios si non fait
     # Recherche des following examples use hardcoded command arguments et remplacement
@@ -75,7 +75,7 @@ def main():
     f = open('/etc/nagios/nrpe.cfg', 'w')
     f.write(message)
     f.close()
-    resultat = 'BertrandBZH'
+    resultat = request_local
 
     module.exit_json(changed=False, results=resultat)
 
