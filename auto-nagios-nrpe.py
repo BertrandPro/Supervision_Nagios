@@ -1,31 +1,43 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
-DOCUMENTATION = '''
+# Copyright: (c) 2020, Your Name <YourName@example.org>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+DOCUMENTATION = r'''
+---
 module: auto_nagios_nrpe
-author: BertrandBZH
-description: Module qui modifie le fichier nrpe.cfg d'un serveur à superviser
+
+short_description: Auto configure nrpe.cfg
+
+version_added: "0.0.2"
+
+description:  Module qui modifie le fichier nrpe.cfg d'un serveur à superviser. 
 
 options:
-  ip_nagios:
-	description: addresse ip (ou host si DNS) du serveur nagios
-	required: yes
-  request:
-	description: requête à exécuter
-	required: yes
-
+    ip_nagios:
+        description: addresse ip (ou host si DNS) du serveur nagios.
+        required: true
+        type: str
+    request:
+        description: This is the message to send to the test module.
+        required: true
+        type: str
+author:
+    - BertrandBZH (bertrand.pro@gmail.com)
 '''
 
-EXAMPLES = '''
-- name: "config nrpe"
+EXAMPLES = r'''
+- name: Config auto nrpe
   auto_nagios_nrpe:
-	ip_nagios: "192.168.1.49"
-	request: ""
+    ip_nagios: "192.168.1.49"
+    request: "toto"
 '''
 
-RETURN = '''
-results:
-	description: retourne BertrandBZH
+RETURN = r'''
+    result:
+       description : return toto
 '''
 
 from ansible.module_utils.basic import AnsibleModule
@@ -34,13 +46,14 @@ from ansible.module_utils.basic import AnsibleModule
 def main():
     module = AnsibleModule(
         argument_spec=dict(
-            ip_nagios=dict(required=True, type='str'),
-            request=dict(required=True, type='str'),
+            ip_nagios=dict(required=False, type='str'),
+            request=dict(required=False, type='str'),
         )
     )
 
     ip_nagios_local = module.params.get('ip_nagios')
     request_local = module.params.get('request')
+
 
 #    import MySQLdb
 
