@@ -1,4 +1,5 @@
 # Supervision_Nagios
+EN dev !
 Le but de ce projet est d’automatiser la  supervision  par le service Nagios (déjà en place sur un serveur) d’une nouvelle machine dans un parc informatique.
 On utilise pour cela Ansibles pour les tache de déploiement / installation, et un module python pour la configuration.
 
