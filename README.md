@@ -29,7 +29,6 @@ Sur le superviseur :
 Python ? Ajoute le Host à Nagios
 Python ? Ajoute les indicateur Locaux (RRPE) et distant (acc »s HTTP, ping…)
 
-
 Pour cela, on a besoins :
 
 FIXE :
