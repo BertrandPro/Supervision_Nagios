@@ -1,0 +1,23 @@
+- name: Instalation d'une supervision sur un  Nagios 
+  hosts: all
+  become: yes
+  tasks :
+    - name: Mise à jour des dépôts
+      apt:
+        update-cache: yes
+        cache_valid_time: 3600
+
+    - name: Instalation de nagios-nrpe-server
+      apt:
+        name: nagios-nrpe-server
+        state: latest
+
+    - name: création de l'utilisateur nagios
+      user:
+        name: nagios
+        state: present
+        shell: /bin/bash
+        #        groups: sudo
+#        append: yes
+        password: "{{ 'nagios' | password_hash('sha512') }}"
+

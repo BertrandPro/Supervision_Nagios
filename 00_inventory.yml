@@ -1,0 +1,7 @@
+all:
+#  hosts:
+#    nagios:
+  children:
+    superviser:
+      hosts:
+        192.168.1.30:
