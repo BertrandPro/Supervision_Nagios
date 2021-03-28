@@ -1,43 +1,67 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
-# Copyright: (c) 2020, Your Name <YourName@example.org>
+# Copyright: (c) 2021, BertrandBZH <YourName@example.org>
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
-from __future__ import (absolute_import, division, print_function)
-__metaclass__ = type
+
+#from __future__ import (absolute_import, division, print_function)
+#__metaclass__ = type
+
+
+
+#DOCUMENTATION = r'''
+#---
+#module: auto_nagios_nrpe
+#
+#short_description: Auto config nrpe.cfg
+ 
+#version_added: "0.0.2"
+ 
+#description: Module qui modifie le fichier nrpe.cfg d'un serveur à superviser.
+ 
+#options:
+#  ip_nagios:
+#	description: addresse ip (ou host si DNS) du serveur nagios
+#	required: yes
+#  request:
+#	description: requête à exécuter
+#	required: yes
+ 
+#author:
+#    - BertrandBZH (bertrand.pro@gmail.com)
+ 
+#'''
 
 DOCUMENTATION = r'''
 ---
-module: auto_nagios_nrpe
+module: my_test_info
 
-short_description: Auto configure nrpe.cfg
+short_description: This is my test info module
 
-version_added: "0.0.2"
+version_added: "1.0.0"
 
-description:  Module qui modifie le fichier nrpe.cfg d'un serveur à superviser. 
+description: This is my longer description explaining my test info module.
 
 options:
-    ip_nagios:
-        description: addresse ip (ou host si DNS) du serveur nagios.
-        required: true
-        type: str
-    request:
+    name:
         description: This is the message to send to the test module.
         required: true
         type: str
+
 author:
-    - BertrandBZH (bertrand.pro@gmail.com)
+    - Your Name (@yourGitHubHandle)
 '''
 
 EXAMPLES = r'''
-- name: Config auto nrpe
+- name: "config nrpe"
   auto_nagios_nrpe:
-    ip_nagios: "192.168.1.49"
-    request: "toto"
+	ip_nagios: "192.168.1.49"
+	request: "toto"
 '''
 
 RETURN = r'''
-    result:
-       description : return toto
+results:
+	description: retourne toto
 '''
 
 from ansible.module_utils.basic import AnsibleModule
@@ -46,14 +70,13 @@ from ansible.module_utils.basic import AnsibleModule
 def main():
     module = AnsibleModule(
         argument_spec=dict(
-            ip_nagios=dict(required=False, type='str'),
-            request=dict(required=False, type='str'),
+            ip_nagios=dict(required=True, type='str'),
+            request=dict(required=True, type='str'),
         )
     )
 
     ip_nagios_local = module.params.get('ip_nagios')
     request_local = module.params.get('request')
-
 
 #    import MySQLdb
 
@@ -64,13 +87,6 @@ def main():
     command[check_disk]=/usr/lib/nagios/plugins/check_disk -u GB -w 20% -c 10% -p /
     command[check_swap]=/usr/lib/nagios/plugins/check_swap -w 50 -c 20
     command[check_mem]=/usr/lib/nagios/plugins/check_mem.sh -w 50 -c 80\n"""
-
-    # resultat dict object
-    resultat = dict(
-        changed = False,
-        original_message='',
-        message='',
-    )
 
     # lecture du fichier de configuration d'exemple suite a l instalation
     f = open('/etc/nagios/nrpe.cfg', 'r')
@@ -95,11 +111,9 @@ def main():
     f = open('/etc/nagios/nrpe.cfg', 'w')
     f.write(message)
     f.close()
-    resultat['changed'] = True
-    resultat['original_message'] = request_local
-    resultat['message'] = 'goodbye'
+    resultat = request_local
 
-    module.exit_json(**resultat)
+    module.exit_json(changed=False, results=resultat)
 
 
 if __name__ == "__main__":
