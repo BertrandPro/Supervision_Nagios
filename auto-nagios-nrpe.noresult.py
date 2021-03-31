@@ -46,14 +46,13 @@ from ansible.module_utils.basic import AnsibleModule
 def main():
     module = AnsibleModule(
         argument_spec=dict(
-            ip_nagios=dict(required=False, type='str'),
-            request=dict(required=False, type='str'),
+            ip_nagios=dict(required=True, type='str'),
+            request=dict(required=True, type='str'),
         )
     )
 
     ip_nagios_local = module.params.get('ip_nagios')
     request_local = module.params.get('request')
-
 
 #    import MySQLdb
 
@@ -64,13 +63,6 @@ def main():
     command[check_disk]=/usr/lib/nagios/plugins/check_disk -u GB -w 20% -c 10% -p /
     command[check_swap]=/usr/lib/nagios/plugins/check_swap -w 50 -c 20
     command[check_mem]=/usr/lib/nagios/plugins/check_mem.sh -w 50 -c 80\n"""
-
-    # resultat dict object
-    resultat = dict(
-        changed = False,
-        original_message='',
-        message='',
-    )
 
     # lecture du fichier de configuration d'exemple suite a l instalation
     f = open('/etc/nagios/nrpe.cfg', 'r')
@@ -95,11 +87,9 @@ def main():
     f = open('/etc/nagios/nrpe.cfg', 'w')
     f.write(message)
     f.close()
-    resultat['changed'] = True
-    resultat['original_message'] = request_local
-    resultat['message'] = 'goodbye'
+    resultat = request_local
 
-    module.exit_json(**resultat)
+    module.exit_json(changed=False, results=resultat)
 
 
 if __name__ == "__main__":
