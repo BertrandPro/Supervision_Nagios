@@ -1,0 +1,30 @@
+---
+#- tasks file for roles/supervise
+- name: Mise Ã  jour des dÃ©pÃ´ts
+  apt:
+    update-cache: yes
+    cache_valid_time: 3600
+  become: yes
+
+- name: Instalation de nagios-nrpe-server
+  apt:
+    name: nagios-nrpe-server
+    state: latest
+  become: yes
+
+- name: crÃ©ation de l'utilisateur nagios
+  user:
+    name: nagios
+    state: present
+    shell: /bin/bash
+#        groups: sudo
+#        append: yes
+    password: "{{ 'nagios' | password_hash('sha512') }}"
+  become: yes
+
+- name: configuration de nrpe.cfg par le module dévelopé en python
+  auto-nagios-nrpe:
+    ip_nagios: '192.168.1.49'
+    request: 'toto'
+
+-
