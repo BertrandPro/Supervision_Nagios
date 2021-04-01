@@ -72,7 +72,7 @@ def main():
         message='',
     )
 
-    # lecture du fichier de configuration d'exemple suite a l installation
+    # lecture du fichier de configuration d'exemple suite a l instalation
     f = open('/etc/nagios/nrpe.cfg', 'r')
     message = f.read()
     f.close()
