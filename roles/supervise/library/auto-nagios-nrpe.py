@@ -55,8 +55,6 @@ def main():
     request_local = module.params.get('request')
 
 
-#    import MySQLdb
-
     indicateurs = """# supervision Auto-Nagios : ajout des commandS argument\n
     command[check_load]=/usr/lib/nagios/plugins/check_load -r -w .15,.10,.05 -c .30,.25,.20
     command[check_procs]=/usr/lib/nagios/plugins/check_procs -w 150 -c 200
@@ -72,7 +70,7 @@ def main():
         message='',
     )
 
-    # lecture du fichier de configuration d'exemple suite a l instalation
+    # lecture du fichier de configuration d'exemple suite a l installation
     f = open('/etc/nagios/nrpe.cfg', 'r')
     message = f.read()
     f.close()
@@ -90,12 +88,15 @@ def main():
     index_fin = message.find('# The following examples allow user-supplied', index_debut) - 2
     if message.find('# supervision Auto-Nagios') == -1:
         message = message[:index_debut] + indicateurs + message[index_fin:]
-
+        resultat['changed'] = True
+    else:
+        resultat['changed'] = False
     # Ecriture de la configuration
     f = open('/etc/nagios/nrpe.cfg', 'w')
     f.write(message)
     f.close()
-    resultat['changed'] = True
+
+
     resultat['original_message'] = request_local
     resultat['message'] = 'goodbye'
 
