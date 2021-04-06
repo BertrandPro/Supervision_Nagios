@@ -1,7 +1,7 @@
 all:
-#  hosts:
-#    nagios:
+  hosts:
+    oc-nagios:
   children:
-    superviser:
+    supervises:
       hosts:
         192.168.1.30:

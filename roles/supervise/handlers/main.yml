@@ -1,2 +1,7 @@
 ---
 # handlers file for roles/supervise
+- name: reload-nagios-nrpe
+  systemd:
+    name: nagios-nrpe-server
+    state: restarted
+    #  become: yes

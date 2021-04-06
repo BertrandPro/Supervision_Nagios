@@ -1,2 +1,14 @@
 ---
 # tasks file for roles/nagios
+
+- name: ajout du fichier 'name_supervise'.cfg à nagios
+  auto-nagios-add:
+    ip_supervise: '192.168.1.30'
+    name_supervise: 'serveur_test30'
+    path_supervision: '/usr/local/nagios/etc/servers/'
+
+- name: redémarage nagios
+  systemd:
+    name: nagios
+    state: restarted
+    #  become: yes
