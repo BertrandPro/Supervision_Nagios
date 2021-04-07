@@ -54,7 +54,7 @@ def main():
     command[check_users]=/usr/lib/nagios/plugins/check_users -w 2 -c 5
     command[check_disk]=/usr/lib/nagios/plugins/check_disk -u GB -w 20% -c 10% -p /
     command[check_swap]=/usr/lib/nagios/plugins/check_swap -w 50 -c 20
-    command[check_mem]=/usr/lib/nagios/plugins/check_mem.sh -w 50 -c 80\n"""
+    command[check_mem]=/usr/lib/nagios/plugins/check_mem -w 50 -c 80\n"""
 
     # resultat dict object
     resultat = dict(
