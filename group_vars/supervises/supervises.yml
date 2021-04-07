@@ -1,1 +1,3 @@
-remote_user: nagios
+ansible_user: bertrandadmin
+ansible_become: true 
+ansible_become_password: Mon29!

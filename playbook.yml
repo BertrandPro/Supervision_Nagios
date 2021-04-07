@@ -1,11 +1,9 @@
 - name: Instalation d'une supervision sur un serveur 
   hosts: supervises
-  user: bertrandadmin
   roles:
     - supervise
 
 - name: Ajout de la supervision sur Nagios 
   hosts: oc-nagios
-  user: nagios
   roles:
     - nagios
