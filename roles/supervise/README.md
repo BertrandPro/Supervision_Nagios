@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Modifie le fichier /etc/nagios/nrpe.cfg pour modifier le serveur nagios et ajouter des indicateur a suivre par le nagios distant.
+Modifie le fichier /etc/nagios/nrpe.cfg pour modifier le serveur nagios et ajouter des indicateurs a suivre par le nagios distant.
 
 Requirements
 ------------
