@@ -4,4 +4,4 @@ all:
   children:
     supervises:
       hosts:
-        192.168.1.30:
+        192.168.1.15:
