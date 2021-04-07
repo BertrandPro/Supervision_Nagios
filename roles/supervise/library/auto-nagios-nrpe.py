@@ -20,10 +20,6 @@ options:
         description: addresse ip (ou host si DNS) du serveur nagios.
         required: true
         type: str
-    request:
-        description: This is the message to send to the test module.
-        required: true
-        type: str
 author:
     - BertrandBZH (bertrand.pro@gmail.com)
 '''
@@ -32,7 +28,6 @@ EXAMPLES = r'''
 - name: Config auto nrpe
   auto_nagios_nrpe:
     ip_nagios: "192.168.1.49"
-    request: "toto"
 '''
 
 RETURN = r'''
@@ -47,12 +42,10 @@ def main():
     module = AnsibleModule(
         argument_spec=dict(
             ip_nagios=dict(required=False, type='str'),
-            request=dict(required=False, type='str'),
         )
     )
 
     ip_nagios_local = module.params.get('ip_nagios')
-    request_local = module.params.get('request')
 
 
     indicateurs = """# supervision Auto-Nagios : ajout des commandS argument\n
@@ -97,7 +90,7 @@ def main():
     f.close()
 
 
-    resultat['original_message'] = request_local
+    resultat['original_message'] = 'message'
     resultat['message'] = 'goodbye'
 
     module.exit_json(**resultat)
