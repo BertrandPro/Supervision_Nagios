@@ -23,6 +23,10 @@ Ce que fait le playbook Ansible :
   - le service nagios est redémaré.
 
 Mode opératoire :
+- Recuperer le répértoire du projet sur le serveur Ansible :  git clone https://github.com/BertrandPro/Supervision_Nagios.git
+- Aller dans le dossier Supervision_Nagios (cd  Supervision_Nagios)
+- copier le clé ssh du serveur Ansible vers le ou les serveurs a supervisé : (ssh-copy-id -i ../.ssh/id_ecdsa.pub superuser@ip_serveur)
+- Eventuellement mettre un agent ssh ( eval $(ssh-agent) && ssh-add -t 2h)
 - Dans 00_inventory.yml, infiqué l'ip ou le hostname (si dns) du serveur nagios, et ceux de la ou des serveur a supervisé
 - Dans playbook.yml, donner un user ayant les doit sudo. Modifier si besoins l'utilisateur (nagios) du serveur nagios.
 - Dans roles/supervise/task/main.yml, 
@@ -31,8 +35,6 @@ Mode opératoire :
 
 old ? 
 
-récupéré le git :
-Ip de Nagos
 Utilisateur et mdp de Nagios
 Utilisateur et mdp commun à tout les hosts
 
