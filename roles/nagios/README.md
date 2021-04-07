@@ -1,38 +1,49 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Crée un fichier serveur_xxx.cfg dans le répertoire donné avec les indicateurs a suivre sur une machine distante.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Un Nagios instalaler avec un repertoire evaluer (ex : /usr/local/nagios/etc/servers/)
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+    ip_supervise:
+        description: address ip (ou host si DNS) du serveur a supervise.
+        required: true
+        type: str
+    name_supervise:
+        description: nom du host a supervise sous la forme serveur_xxx.
+        required: true
+        type: str
+    path_supervision:
+        description: chemin pour le fichier serveur_xxx.cfg
+        required: true
+        type: str
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+No.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
+- name: ajout du fichier 'name_supervise'.cfg à nagios
+  auto-nagios-add:
+    ip_supervise: '192.168.1.25'
+    name_supervise: 'serveur_test25'
+    path_supervision: '/usr/local/nagios/etc/servers/'
+  
 License
 -------
 
-BSD
+GNU General Public License v3.0+
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Bertrand PRODAULT.
