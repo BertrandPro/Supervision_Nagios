@@ -1,7 +1,5 @@
 # Supervision_Nagios
 
-En cours de dev... !
-
 Le but de ce projet est d’automatiser la  supervision  par le service Nagios (déjà en place sur un serveur) d’une nouvelle machine dans un parc informatique.
 On utilise pour cela Ansibles pour les taches de déploiement / installation, et des modules Ansible en python pour la configuration.
 
@@ -32,14 +30,3 @@ Mode opératoire :
 - Dans group_vars/supervises/supervises.yml, indiquer l'utilisateur et le mot de passe de l'utilisateur sudo. 
 - Dans roles/supervise/task/main.yml, modifier l'ip_nagios:
 - Dans roles/nagios/task/main.yml, modifier l'ip, le nom du serveur et le chemin du dossier contenant les configuration Nagios.
-
-
-old ? 
-
-Utilisateur et mdp de Nagios
-Utilisateur et mdp commun à tout les hosts
-
-
-sur le superviseur (déjà configurer avec une paire de clé et un agent-ssh :
-$ ssh-copy-id USER@IP
-valider l’empreinte et le mdp.
