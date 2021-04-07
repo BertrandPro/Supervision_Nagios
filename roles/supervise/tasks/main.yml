@@ -1,6 +1,6 @@
 ---
 #- tasks file for roles/supervise
-- name: Mise a  jour des depots
+- name: Mise a jour des depots
   apt:
     update-cache: yes
     cache_valid_time: 3600
@@ -12,7 +12,7 @@
     state: latest
   become: yes
 
-- name: crÃ©ation de l'utilisateur nagios
+- name: creation de l'utilisateur nagios
   user:
     name: nagios
     state: present
@@ -26,9 +26,10 @@
   auto-nagios-nrpe:
     ip_nagios: '192.168.1.49'
     request: 'toto'
+  become: yes
 
 - name: redémarage nagios-nrpe-server
   systemd:
     name: nagios-nrpe-server
     state: restarted
-    #  become: yes
+  become: yes
