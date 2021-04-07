@@ -22,13 +22,12 @@
     password: "{{ 'nagios' | password_hash('sha512') }}"
   become: yes
 
-- name: configuration de nrpe.cfg par le module dévelopé en python
+- name: configuration de nrpe.cfg par le module developer en python
   auto-nagios-nrpe:
     ip_nagios: '192.168.1.49'
-    request: 'toto'
   become: yes
 
-- name: redémarage nagios-nrpe-server
+- name: redemarage nagios-nrpe-server
   systemd:
     name: nagios-nrpe-server
     state: restarted
