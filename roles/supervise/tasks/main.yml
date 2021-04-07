@@ -12,6 +12,14 @@
     state: latest
   become: yes
 
+- name: Instalation du plugin nagios Check mem
+    get_url:
+      url: https://github.com/whereisaaron/linux-check-mem-nagios-plugin/blob/6b46d9ac1fcd9bc60702086fe8770f50d65d0b8d/check_mem
+      dest: /usr/lib/nagios/plugins/
+      mode: 0777
+      group: nagios
+      owner: nagios
+
 - name: creation de l'utilisateur nagios
   user:
     name: nagios
@@ -22,13 +30,12 @@
     password: "{{ 'nagios' | password_hash('sha512') }}"
   become: yes
 
-- name: configuration de nrpe.cfg par le module dévelopé en python
+- name: configuration de nrpe.cfg par le module developer en python
   auto-nagios-nrpe:
     ip_nagios: '192.168.1.49'
-    request: 'toto'
   become: yes
 
-- name: redémarage nagios-nrpe-server
+- name: redemarage nagios-nrpe-server
   systemd:
     name: nagios-nrpe-server
     state: restarted

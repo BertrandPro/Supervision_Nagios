@@ -1,17 +1,13 @@
 ---
 # tasks file for roles/nagios
 
-- name: ajout du fichier 'name_supervise'.cfg à nagios
+- name: ajout du fichier 'name_supervise'.cfg a nagios avec un module developer en python
   auto-nagios-add:
-    ip_supervise: '192.168.1.25'
-    name_supervise: 'serveur_test25'
+    ip_supervise: '192.168.1.15'
+    name_supervise: 'serveur_test15'
     path_supervision: '/usr/local/nagios/etc/servers/'
 
 - name: redémarage nagios
-  ansible.builtin.command: 'restartNagios'
-
-#- name: redémarage nagios
-#  systemd:
-#    name: nagios
-#    state: restarted
-#    become: yes
+  systemd:
+    name: nagios
+    state: restarted
