@@ -26,7 +26,7 @@ Mode opératoire :
 - copier le clé ssh du serveur Ansible vers le ou les serveurs a supervisé : (ssh-copy-id -i ../.ssh/id_ecdsa.pub superuser@ip_serveur)
 - Eventuellement mettre un agent ssh ( eval $(ssh-agent) && ssh-add -t 2h)
 - Dans 00_inventory.yml, indiqué l'ip ou le hostname (si dns) du serveur nagios, et ceux de la ou des serveur a supervisé.
-- Dans host_vars/ créé un fichier du nom du serveur nagios avec l'utilisateur et son mot de passe. utiliser le fichier oc-nagios.yml comme exemple.
-- Dans group_vars/supervises/supervises.yml, indiquer l'utilisateur et le mot de passe de l'utilisateur sudo. 
-- Dans roles/supervise/task/main.yml, modifier l'ip_nagios:
+- Dans host_vars/ créé un fichier du nom du serveur nagios avec l'utilisateur et son mot de passe. utiliser le fichier oc-nagios.yml comme exemple. Le fichier etant crypté, faire un : "ansible-vault edit host_var/oc-nagios.yml --vault-password-file vault-passwd.txt"
+- Dans group_vars/supervises/supervises.yml, indiquer l'utilisateur et le mot de passe de l'utilisateur sudo. Le fichier etant crypté, faire un : "ansible-vault edit group_var/supervises/supervises.yml --vault-password-file vault-passwd.txt"
+- Dans roles/supervise/task/main.yml, modifier l'ip_nagios:.
 - Dans roles/nagios/task/main.yml, modifier l'ip, le nom du serveur et le chemin du dossier contenant les configuration Nagios.
