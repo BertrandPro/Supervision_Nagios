@@ -69,7 +69,7 @@ def main():
     f.close()
 
     # Recherche de l'adresse du serveur nagios et remplacement
-   index_debut = message.find('allowed_hosts=127.0.0.1')
+    index_debut = message.find('allowed_hosts=127.0.0.1')
     index_fin = message.find('\n', index_debut)
     message = message[:index_debut] + 'allowed_hosts=' + ip_nagios_local + message[index_fin:]
 
