@@ -30,3 +30,4 @@ Mode opératoire :
 - Dans group_vars/supervises/supervises.yml, indiquer l'utilisateur et le mot de passe de l'utilisateur sudo. Le fichier etant crypté, faire un : "ansible-vault edit group_var/supervises/supervises.yml --vault-password-file vault-passwd.txt"
 - Dans roles/supervise/task/main.yml, modifier l'ip_nagios:.
 - Dans roles/nagios/task/main.yml, modifier l'ip, le nom du serveur et le chemin du dossier contenant les configuration Nagios.
+- lancer le playybook : ansible-playbook -i 00_inventory.yml --vault-password-file vault-passwd.txt  playbook.yml
